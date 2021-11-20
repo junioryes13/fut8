@@ -55,6 +55,4 @@ public class JogadorController {
 
         return new jogadorResponse(jogadorEncontrado);
     }
-
-
 }
