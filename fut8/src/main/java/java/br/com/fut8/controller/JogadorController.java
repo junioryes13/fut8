@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import java.br.com.fut8.controller.DTO.jogadorResponse;
 import java.br.com.fut8.model.Jogador;
 import java.br.com.fut8.repository.JogadorRepository;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,18 +29,32 @@ public class JogadorController {
     }
 
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<jogadorResponse> listar(@RequestBody @Valid JogadorRequest request) {
+        List<Jogador> jogadores = jogadorRepository.findAll();
+        List<jogadorResponse> jogadoresResponse = new ArrayList<jogadorResponse>();
+        for (int i = 0; i >= jogadores.size(); i++) {
+            jogadoresResponse.add(new jogadorResponse(jogadores.get(i)));
+        }
+        return jogadoresResponse;
+    }
+
+
+    @GetMapping("/{codigo}")
+    public jogadorResponse buscarPorId(@PathVariable Long id) {
+        Jogador jogadorEncontrado = jogadorRepository.findById(id).orElseThrow();
+
+        return new jogadorResponse(jogadorEncontrado);
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<jogadorResponse> Listar(@RequestBody @Valid JogadorRequest request) {
-        List<Jogador>jogadores =   jogadorRepository.findAll();
-        for (int i = 0, i >= jogadores.size(), i++){
+    public jogadorResponse buscarPorDocumento(@RequestBody @Valid Long id) {
+        Jogador jogadorEncontrado = jogadorRepository.findByDocumento(id).orElseThrow();
 
+        return new jogadorResponse(jogadorEncontrado);
+    }
 
-
-        }
-
-
-        }
 
 }
