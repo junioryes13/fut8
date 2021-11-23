@@ -1,9 +1,10 @@
-package java.br.com.fut8.controller;
+package br.com.fut8.controller;
+
+import br.com.fut8.model.Jogador;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
-import java.br.com.fut8.model.Jogador;
 import java.time.LocalDateTime;
 
 public class JogadorRequest {

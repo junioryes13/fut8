@@ -1,4 +1,4 @@
-package java.br.com.fut8.model;
+package br.com.fut8.model;
 
 import javax.validation.constraints.Max;
 import java.time.LocalDateTime;

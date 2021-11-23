@@ -1,6 +1,7 @@
-package java.br.com.fut8.controller.DTO;
+package br.com.fut8.controller.DTO;
 
-import java.br.com.fut8.model.Jogador;
+import br.com.fut8.model.Jogador;
+
 import java.time.LocalDateTime;
 
 public class jogadorResponse {

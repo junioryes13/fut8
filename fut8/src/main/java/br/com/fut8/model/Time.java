@@ -1,4 +1,4 @@
-package java.br.com.fut8.model;
+package br.com.fut8.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

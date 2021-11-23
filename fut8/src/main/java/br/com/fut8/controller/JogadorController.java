@@ -1,13 +1,14 @@
-package java.br.com.fut8.controller;
+package br.com.fut8.controller;
 
+import br.com.fut8.model.Jogador;
+import br.com.fut8.repository.JogadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.br.com.fut8.controller.DTO.jogadorResponse;
-import java.br.com.fut8.model.Jogador;
-import java.br.com.fut8.repository.JogadorRepository;
+import br.com.fut8.controller.DTO.jogadorResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,6 @@ public class JogadorController {
 
     @Autowired
     JogadorRepository jogadorRepository;
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
@@ -32,7 +32,7 @@ public class JogadorController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<jogadorResponse> listar(@RequestBody @Valid JogadorRequest request) {
-        List<Jogador> jogadores = jogadorRepository.findAll();
+        List<Jogador> jogadores = (List<Jogador>) jogadorRepository.findAll();
         List<jogadorResponse> jogadoresResponse = new ArrayList<jogadorResponse>();
         for (int i = 0; i >= jogadores.size(); i++) {
             jogadoresResponse.add(new jogadorResponse(jogadores.get(i)));
@@ -48,7 +48,7 @@ public class JogadorController {
         return new jogadorResponse(jogadorEncontrado);
     }
 
-    @GetMapping
+    @GetMapping("/{documento}")
     @ResponseStatus(HttpStatus.OK)
     public jogadorResponse buscarPorDocumento(@RequestBody @Valid Long id) {
         Jogador jogadorEncontrado = jogadorRepository.findByDocumento(id).orElseThrow();
