@@ -17,6 +17,10 @@ public class jogadorResponse {
         this.dataCriação = jogador.getDataCriacao();
     }
 
+    @Deprecated
+    public jogadorResponse() {
+    }
+
     public String getNome() {
         return nome;
     }

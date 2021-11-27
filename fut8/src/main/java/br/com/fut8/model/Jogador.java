@@ -1,12 +1,12 @@
 package br.com.fut8.model;
 
+import br.com.fut8.annotations.isUnique;
+import br.com.fut8.util.Encrypt;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +19,8 @@ public class Jogador {
     private String nome;
 
     @NotBlank
-    private String documento;
+    @CPF
+    private String CPF;
 
     @NotBlank
     @Email
@@ -29,17 +30,22 @@ public class Jogador {
     private String senha;
 
     @Past
+    @NotNull
     private LocalDateTime dataNasc;
 
-    @FutureOrPresent
     private LocalDateTime dataCriacao;
 
     public Jogador(String nome, String documento, String email, String senha, LocalDateTime dataNasc) {
         this.nome = nome;
-        this.documento = documento;
+        this.CPF = documento;
         this.email = email;
-        this.senha = senha;
+        this.senha = Encrypt.encrypt(documento);
         this.dataNasc = dataNasc;
+        this.dataCriacao = LocalDateTime.now();
+    }
+
+    @Deprecated
+    public Jogador() {
     }
 
     public Long getId() {
@@ -55,8 +61,8 @@ public class Jogador {
         return nome;
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getCPF() {
+        return CPF;
     }
 
     public String getEmail() {

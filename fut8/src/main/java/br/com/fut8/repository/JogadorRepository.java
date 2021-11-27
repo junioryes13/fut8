@@ -11,5 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface JogadorRepository extends JpaRepository<Jogador,Long> {
-    Optional<Jogador> findByDocumento(Long id);
+    Optional<Jogador> findByCPF(String id);
 }
